@@ -50,6 +50,28 @@ router.post("/deleteproject", async (req, res)=>{
  
     
 })
+router.post("/test", async (req, res)=>{
+    try {    
+   const response = {cevap:"test url e post"}
+    console.log("req : ",req.body)
+    return res.status(201).json( response);
+    } catch (error) {
+        console.log(error)
+        return res.json({message: "project couldn't delete"})
+    }   
+})
+ 
+router.get("/test", async (req, res)=>{
+    try {    
+   const response = {cevap:"test url e get"}
+    console.log("req : ",req.body)
+    return res.status(201).json( response);
+    } catch (error) {
+        console.log(error)
+        return res.json({message: "project couldn't delete"})
+    }   
+})
+ 
 router.post("/userprojects", async (req, res)=>{
     try {
 
