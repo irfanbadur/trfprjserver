@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import MongoClient from 'mongodb'
 import bcrypt from 'bcryptjs'
 import User from '../models/userModel.js';
+import Genel from '../models/genel.js';
 import ProjectTemplate from '../models/ProjeTaslak.js'
 import MusteriDB from '../models/MusteriModel.js'
 import Mesajlar from '../models/Mesajlar.js'
@@ -59,6 +60,80 @@ router.post("/test", async (req, res)=>{
         console.log(error)
         return res.json({message: "project couldn't delete"})
     }   
+})
+ 
+router.post("/uyegiristrue", async (req, res)=>{
+    try {    
+   const response = {cevap:"uyegiristrue"}
+    console.log("req : ",req.body)
+     
+         const izin = await Genel.updateOne(
+        { "_id": "645f8a69fdf854262af95950"}, 
+       { $set:  { 
+            "UyeGiris":true },
+        })
+    return res.status(200).json(izin);
+    } catch (error) {
+        console.log(error)
+        return res.json({message: "project couldn't delete"})
+    }   
+})
+ 
+router.post("/uyegirisfalse", async (req, res)=>{
+    try {    
+   const response = {cevap:"uyegirisfalse"}
+    console.log("req : ",req.body)
+    const izin = await Genel.updateOne(
+        { "_id": "645f8a69fdf854262af95950"}, 
+       { $set:  { 
+            "UyeGiris":false },
+        })
+        return res.status(200).json(izin);
+    } catch (error) {
+        console.log(error)
+        return res.json({message: "project couldn't delete"})
+    }   
+})
+ 
+router.post("/uyekayittrue", async (req, res)=>{
+    try {    
+   const response = {cevap:"uyekayittrue"}
+    console.log("req : ",req.body)
+     
+         const izin = await Genel.updateOne(
+        { "_id": "645f8a69fdf854262af95950"}, 
+       { $set:  { 
+            "UyeKayit":true },
+        })
+    return res.status(200).json(izin);
+    } catch (error) {
+        console.log(error)
+        return res.json({message: "project couldn't delete"})
+    }   
+})
+ 
+router.post("/uyekayitfalse", async (req, res)=>{
+    try {    
+   const response = {cevap:"uyekayitfalse"}
+    console.log("req : ",req.body)
+    const izin = await Genel.updateOne(
+        { "_id": "645f8a69fdf854262af95950"}, 
+       { $set:  { 
+            "UyeKayit":false },
+        })
+        return res.status(200).json(izin);
+    } catch (error) {
+        console.log(error)
+        return res.json({message: "project couldn't delete"})
+    }   
+})
+router.get("/izinler", async (req,res)=>{ 
+    try {               
+        const izinler = await Genel.find()        
+        return res.status(200).json({izinler, message: 'Tüm Projeler listesi' })
+    } catch (error) {
+        return res.status(400).json({ message: error.message })
+    }
 })
  
 router.get("/test", async (req, res)=>{
